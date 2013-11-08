@@ -20,8 +20,9 @@
 (require 'el-get)
 
 (setq el-get-sources
-      '((:name magit
-         :after (global-set-key (kbd "C-x C-z") 'magit-status))
+      '(
+        (:name undo-tree
+         :after (global-undo-tree-mode))
 
         (:name jedi
          :after (progn
