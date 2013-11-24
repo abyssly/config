@@ -28,7 +28,12 @@
          :after (progn
                   (add-hook 'python-mode-hook 'jedi:setup)
                   (setq jedi:setup-keys t)
-                  (setq jedi:complete-on-dot t)))))
+                  (setq jedi:complete-on-dot t)))
+
+        (:name smex
+         :after (progn
+                  (global-set-key (kbd "M-x") 'smex)
+                  (global-set-key (kbd "M-X") 'smex-major-mode-commands)))))
 
 ; load kinds of packages
 (setq my-packages (append '(el-get markdown-mode)
