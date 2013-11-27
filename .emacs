@@ -4,6 +4,7 @@
 (menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 (setq backup-directory-alist '(("." . "~/.backups")))
+(ido-mode)
 
 ; my own functions
 (defun copy-line ()
