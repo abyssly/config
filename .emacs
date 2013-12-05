@@ -1,12 +1,20 @@
-; global config
+;; global config
 (show-paren-mode)
 (column-number-mode)
 (menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 (setq backup-directory-alist '(("." . "~/.backups")))
+(recentf-mode)
 (ido-mode)
 
-; my own functions
+;; my own varibles and keys
+(setq org-tags-column 52)
+; show recent files when switching buffers [http://wikemacs.org/index.php/Ido#Virtual_Buffers]
+(setq ido-use-virtual-buffers t)
+(global-set-key "\C-ca" 'org-agenda)
+(setq org-agenda-files '("~/org/"))
+
+;; my own functions
 (defun copy-line ()
   "Save current line into Kill-Ring without mark the line"
   (interactive)
@@ -16,7 +24,7 @@
 
 (global-set-key (kbd "C-c C-k") 'copy-line)
 
-; load el-get
+;; load el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get)
 
@@ -37,10 +45,12 @@
         (:name smex
          :after (progn
                   (global-set-key (kbd "M-x") 'smex)
-                  (global-set-key (kbd "M-X") 'smex-major-mode-commands)))))
+                  (global-set-key (kbd "M-X") 'smex-major-mode-commands)))
 
-; load kinds of packages
+        ))
+
 (setq my-packages (append '(el-get markdown-mode)
                           (mapcar 'el-get-source-name el-get-sources)))
 
 (el-get 'sync my-packages)
+
