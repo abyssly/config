@@ -14,15 +14,13 @@
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-agenda-files '("~/org/"))
 
-;; my own functions
-(defun copy-line ()
-  "Save current line into Kill-Ring without mark the line"
-  (interactive)
-  (let ((beg (line-beginning-position))
-	(end (line-end-position)))
-    (copy-region-as-kill beg end)))
-
-(global-set-key (kbd "C-c C-k") 'copy-line)
+;; my own functions(advices)
+(defadvice kill-ring-save (before line-copy activate compile)
+  "When called interactively with no active region, copy the current line."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+       (list (line-beginning-position) (line-end-position)))))
 
 ;; load el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
